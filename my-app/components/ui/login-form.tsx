@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import Link from "next/link"
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -78,7 +79,7 @@ const form = useForm<z.infer<typeof formSchema>>({
         <LoginEmail></LoginEmail>
         <Button className="mr-1 ml-1">Reset Password</Button>
         </div>
-        <p>Dont have an account?<a href='/' className="text-blue-500"> register here</a></p>
+        <p>Dont have an account?<Link href='/' className="text-blue-500"> register here</Link></p>
       </form>
     </Form>
   )
