@@ -15,7 +15,7 @@ import {
 
   export const LinksCard = () => {
     return (
-      <div className="w-80 m-12">
+      <div className="w-80 m-12 scale-75 md:scale-100" >
         <Card>
           <CardHeader>
               <CardTitle>Follow Us</CardTitle>

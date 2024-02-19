@@ -1,13 +1,15 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from "next";
-
-type Data = {
-  name: string;
-};
-
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>,
+import { NextApiRequest, NextApiResponse } from 'next';
+import { sql } from '@vercel/postgres';
+ 
+export default async function handler(
+  request: NextApiRequest,
+  response: NextApiResponse,
 ) {
-  res.status(200).json({ name: "John Doe" });
+  try {
+    const result =
+      await sql`CREATE TABLE IF NOT EXISTS Pets ( Name varchar(255), Owner varchar(255) );`;
+    return response.status(200).json({ result: result.rows });
+  } catch (error) {
+    return response.status(500).json({ error });
+  }
 }

@@ -8,13 +8,14 @@ import { GabeCard } from "@/components/ui/team/gabe-card";
 import { NolanCard } from "@/components/ui/team/nolan-card";
 import ContactCard from "@/components/ui/contact-card";
 import LinksCard from "@/components/ui/links-card";
-import AboutCard from "@/components/ui/about-card";
+import { useUser } from "@auth0/nextjs-auth0/client"
+import UserCard from "@/components/ui/user-card";
+import Dashboard from "@/components/ui/userdash/dashboard";
 
 
 export default function Home() {
   const [opacity, setOpacity] = useState(0);
-
-  // arrow timer
+  const { user, error, isLoading } = useUser();
   useEffect(() => {
     const timer = setTimeout(() => {
       setOpacity(100);
@@ -22,10 +23,20 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
+
+  //if(user) {
+  //return (
+  //  <>
+  //  hello
+  //  </>
+  //)   
+//}
+
+
   return (
-    <div className="relative">
-      {/* Fixed Navigation */}
-      {/* Full Viewport Container */}
+    <div className="">
       <div
         className="relative bg-no-repeat bg-cover bg-center h-screen flex flex-col items-center"
         style={{
@@ -33,16 +44,16 @@ export default function Home() {
             "url('https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80')",
         }}
       >
-        <div className="bg-transparent flex flex-row">
+        <div className="bg-transparent flex flex-row my-4 md:my-0">
           <LandingNav />
         </div>
 
         {/* Centered Content */}
-        <div className="flex flex-col items-center justify-center h-full w-6/12 break-words -mt-36">
-          <h1 className="text-5xl font-bold text-black mb-8 text-center">
+        <div className="flex flex-col items-center justify-center h-full md:w-6/12 break-words -mt-36">
+          <h1 className="  font-bold text-black md:mb-8 md:text-xl text-center">
             Elevate Your Business with AI Expertise.
           </h1>
-          <p className="text-gray-500 text-center m-10">
+          <p className="text-xs text-gray-500 text-center my-10 mx-2 md:m-10">
             <b>
               At Dynamic Solutions, we specialize in integrating sophisticated
               machine learning technologies into the fabric of small businesses.
@@ -53,7 +64,7 @@ export default function Home() {
             </b>
           </p>
           <Button className="text-lg bg-gradient-to-r from-violet-600 to-indigo-600">
-            Sign up
+            <a href='/api/auth/login'>Sign up</a>
             <GoArrowRight className="ml-2" />
           </Button>
         </div>
@@ -70,12 +81,12 @@ export default function Home() {
       {/* Service */}
       <div className="w-full bg-slate-300">
         <div className="container mx-auto py-16">
-          <div className="flex flex-row m-4">
+          <div className="flex flex-col md:flex-row m-4">
             <div className="w-full md:w-1/2">
               <h2 className="text-4xl text-gray-800 font-bold leading-tight">
                 Our Services
               </h2>
-              <p className="text-gray-600 text-xl py-4">
+              <p className="text-gray-600 md:text-xl py-4">
                 Transform your business operations with the fusion of the latest
                 machine learning technology and expert business consulting. Our
                 state-of-the-art solutions are tailored to optimize your
@@ -101,7 +112,7 @@ export default function Home() {
       {/* Process */}
       <div className="w-full bg-slate-300">
         <div className="container mx-auto py-16">
-          <div className="flex flex-wrap items-center m-4 w-80%">
+          <div className="flex flex-col-reverse md:flex-wrap md:flex-row items-center m-4 w-80%">
             <div className="w-full md:w-1/2 flex justify-center items-center">
               <Image
                 src="/images/busy2.avif"
@@ -137,9 +148,9 @@ export default function Home() {
         </div>
 
         {/* Team */}
-        <div className="w-full h-700 bg-transparent flex flex-col justify-center items-center space-between">
-          <h1 className="font-serif text-6xl font-bold">Meet the team</h1>
-          <div className="flex flex-row w-screen items-center justify-center">
+        <div className="w-full h-auto md:h-700 bg-transparent flex flex-col justify-center items-center space-between mt-64 md:my-6">
+          <h1 className="font-serif text-6xl font-bold mx-2">Meet the team</h1>
+          <div className="flex flex-col md:flex-row w-screen items-center justify-center">
             <div className="m-8 shadow-lg">
               <GabeCard />
             </div>
@@ -148,8 +159,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="h-96 w-screen bg-white flex justify-center items-center p-4">
-          <ul className="w-screen list-none flex flex-row items-center justify-center m-4">
+        {/*footer*/}
+        <div className=" h-164 w-screen bg-white flex justify-center items-center p-4 my-4">
+          <ul className="w-screen list-none flex flex-col md:flex-row items-center justify-center md:m-4">
             <li>
               <ContactCard />
             </li>

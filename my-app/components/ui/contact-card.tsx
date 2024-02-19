@@ -14,7 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 const ContactCard = () => {
   return (
-    <div className="w-80 m-12">
+    <div className="w-80 md:m-12 scale-75 md:scale-100">
       <Card>
         <CardHeader>
           <CardTitle>Contact Us</CardTitle>

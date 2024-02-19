@@ -5,7 +5,7 @@ const nextConfig = {
 
   // Add this images configuration
   images: {
-    domains: ['images.unsplash.com'],
+    domains: ['images.unsplash.com', 'lh3.googleusercontent.com'],
   },
 };
 
