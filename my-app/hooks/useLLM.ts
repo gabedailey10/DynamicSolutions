@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-const API_ENDPOINT = ';
+const API_ENDPOINT = '';
 interface UseInvokeBedrockModelResponse {
     data: any; // You can replace 'any' with a more specific type that matches your expected response
     error: Error | null;
